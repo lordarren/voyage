@@ -80,24 +80,31 @@ def summarize(articles):
 You are an automotive industry intelligence analyst.
 Today is {date.today().strftime('%d %B %Y')}.
 
-Below are raw news articles fetched from the web. 
-Produce a concise executive brief in this exact format:
+Below are raw news articles fetched from the web.
+Produce a concise executive brief in clean HTML format using these exact tags:
 
----
-MUST READ (pick 3-5 most important, with your 2-line so-what analysis)
-- [Title] | [Source domain]
-  URL: [url]
-  So what: [2 sentences why this matters for Toyota/SEA automotive]
+<h3>MUST READ</h3>
+For each must-read item (pick 3-5 most important):
+<div class="item">
+<b>Title</b> | Source<br>
+<a href="URL">URL</a><br>
+<i>So what:</i> 2 sentences why this matters for Toyota/SEA automotive.
+</div>
 
-HEADLINES ONLY (remaining items, one line each)
-- [Title] | [Source] | [URL]
+<h3>HEADLINES ONLY</h3>
+For remaining items:
+<div class="item">
+Title | Source | <a href="URL">link</a>
+</div>
 
-TREND SIGNAL (1-3 slow-burn themes worth watching this week)
-- [Theme]: [one sentence]
----
+<h3>TREND SIGNAL</h3>
+<div class="item">
+<b>Theme:</b> one sentence per signal.
+</div>
 
-Be direct. No filler. Prioritize Toyota, SEA market, BEV/EV policy, and competitor moves.
-Ignore celebrity news, unrelated content, or obvious PR fluff.
+Rules: No markdown. No asterisks. No dashes. Only HTML tags above.
+Prioritize Toyota, SEA market, BEV/EV policy, competitor moves.
+Ignore PR fluff and unrelated content.
 
 ARTICLES:
 {articles_text}
@@ -115,16 +122,24 @@ def send_email(brief_text):
     subject = f"Automotive Intel Brief — {today}"
 
     html_body = f"""
-<html><body style="font-family:Georgia,serif;max-width:680px;margin:auto;padding:26px;color:#222;background:#fff;">
-<h2 style="border-bottom:3px solid #c0392b;padding-bottom:8px;">
-  Automotive Intel Brief<br>
-  <span style="font-size:16px;color:#666;">{today}</span>
-</h2>
-<div style="font-size:18px;line-height:1.8;color:#222;white-space:pre-wrap;">
+<html>
+<head>
+<style>
+  body {{ font-family: Georgia, serif; max-width: 680px; margin: auto; 
+         padding: 24px; color: #222; background: #fff; }}
+  h2 {{ border-bottom: 2px solid #c0392b; padding-bottom: 8px; }}
+  h3 {{ color: #c0392b; margin-top: 28px; margin-bottom: 8px; }}
+  .item {{ margin-bottom: 16px; line-height: 1.7; }}
+  a {{ color: #c0392b; }}
+  i {{ color: #555; }}
+</style>
+</head>
+<body>
+<h2>Automotive Intel Brief<br>
+<span style="font-size:14px;color:#666;">{today}</span></h2>
 {brief_text}
-</div>
 <hr style="margin-top:32px;border:none;border-top:1px solid #ddd;">
-<p style="font-size:12px;color:#999;">Voyage Agent · lordarren/voyage</p>
+<p style="font-size:12px;color:#999;">Voyage Agent · daily brief</p>
 </body></html>
 """
 
