@@ -56,9 +56,10 @@ def fetch_news():
     for topic in TOPICS:
         results = client.search(
             query=topic,
-            max_results=3,
-            search_depth="basic",
-            include_raw_content=False
+            max_results=5,
+            search_depth="advanced",
+            include_raw_content=False,
+            days=7
         )
         for r in results.get("results", []):
             all_results.append({
@@ -78,7 +79,7 @@ def summarize(articles):
 
     prompt = f"""
 You are an automotive industry intelligence analyst.
-Today is {date.today().strftime('%d %B %Y')}.
+Today is {date.today().strftime('%d %B %Y')} (weekly edition — covering the past 7 days).
 
 Below are raw news articles fetched from the web.
 Produce a concise executive brief in clean HTML format using these exact tags:
