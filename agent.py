@@ -115,14 +115,14 @@ def send_email(brief_text):
     subject = f"Automotive Intel Brief — {today}"
 
     html_body = f"""
-<html><body style="font-family:Georgia,serif;max-width:680px;margin:auto;padding:24px;color:#222;">
-<h2 style="border-bottom:2px solid #c0392b;padding-bottom:8px;">
+<html><body style="font-family:Georgia,serif;max-width:680px;margin:auto;padding:26px;color:#222;background:#fff;">
+<h2 style="border-bottom:3px solid #c0392b;padding-bottom:8px;">
   Automotive Intel Brief<br>
-  <span style="font-size:14px;color:#666;">{today}</span>
+  <span style="font-size:16px;color:#666;">{today}</span>
 </h2>
-<pre style="white-space:pre-wrap;font-family:Georgia,serif;font-size:15px;line-height:1.7;">
+<div style="font-size:18px;line-height:1.8;color:#222;white-space:pre-wrap;">
 {brief_text}
-</pre>
+</div>
 <hr style="margin-top:32px;border:none;border-top:1px solid #ddd;">
 <p style="font-size:12px;color:#999;">Voyage Agent · lordarren/voyage</p>
 </body></html>
